@@ -25,10 +25,9 @@ namespace TextAnalyzer
             foreach (var r in result)
             {
 
-                ListViewItem lvi = new ListViewItem();
-                lvi.SubItems.Add(r.Key.ToString());
+                ListViewItem lvi = new ListViewItem(r.Key.ToString());
                 lvi.SubItems.Add(r.Value.ToString());
-                //lbResults.Items.Add(r.Key.ToString(), r.Value.ToString()); 
+                 
                 lbResults.Items.Add(lvi);
             }
 
