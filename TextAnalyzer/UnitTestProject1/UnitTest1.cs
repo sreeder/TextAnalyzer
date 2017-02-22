@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using TextAnalyzer;
 
 namespace UnitTestProject1
@@ -49,11 +50,24 @@ namespace UnitTestProject1
                 Dictionary<char, int> result = WorkerBee.AnalyzeText(pair.Key);
 
                 //Assert
-                //for(int i = 0; i < 0; i++)
                 Assert.IsTrue(pair.Value.SequenceEqual(result));
             }
-
         }
-       
+
+        [TestMethod]
+        public void Can_Skip_Others()
+        {
+            Dictionary<string, Dictionary<char, int>> textlist = new Dictionary<string, Dictionary<char, int>>();
+            var val = WorkerBee.getAlphaDict();
+            textlist.Add(" !@#$%^&*(){}:><?", val);
+            foreach (KeyValuePair<string, Dictionary<char, int>> pair in textlist)
+            {
+                //Act
+                Dictionary<char, int> result = WorkerBee.AnalyzeText(pair.Key);
+
+                //Assert
+                Assert.IsTrue(pair.Value.SequenceEqual(result));
+            }
+        }
     }
 }
